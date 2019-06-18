@@ -81,7 +81,7 @@
                         <xs:documentation></xs:documentation>
                     </xs:annotation>
             </xs:element>
-            <xs:element name="Relationships"/>
+            <xs:element name="Relationships" type="argos:RelationshipsType" minOccurs="0" maxOccurs="1" />
         </xs:sequence>
         <xs:attribute name="id" type="xs:string" use="required"/>
         <xs:attribute name="name" type="xs:string" use="required"/>
@@ -108,18 +108,12 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="Relationships">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="People" type="argos:PeopleType" minOccurs="0" maxOccurs="1"/>
-                        <xs:element name="Organizations" type="argos:OrganizationsType" minOccurs="0" maxOccurs="1"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+            <xs:element name="Relationships" type="argos:RelationshipsType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Roles" type="argos:RolesType" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:integer" use="required"/>
-        <xs:attribute name="short_name" type="xs:string" use="required"/>
-        <xs:attribute name="long_name" type="xs:string" use="required"/>
+        <xs:attribute name="short" type="xs:string" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
     </xs:complexType>
     <!-- =============================================================================== -->
     <!-- ==================================  PERSON  =================================== -->
@@ -134,18 +128,8 @@
             <xs:documentation></xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="Relationship" minOccurs="0" maxOccurs="2">
-                    <xs:annotation>
-                            <xs:documentation>Relationship type (i.e. owner or breeder)</xs:documentation>
-                        </xs:annotation>
-            </xs:element>
-            <xs:element name="Registries" minOccurs="0" maxOccurs="1">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="Registry" type="argos:RegistryType" minOccurs="0" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+            <xs:element name="Relationships" type="argos:RelationshipsType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Roles" type="argos:RolesType" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:integer" use="required"/>
         <xs:attribute name="first_name" type="xs:string" use="required"/>
@@ -160,14 +144,14 @@
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="OrganizationType">
-        <xs:annotation>
-            <xs:documentation></xs:documentation>
-        </xs:annotation>
         <xs:sequence>
-            <xs:element name="First_Name" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element name="Last_Name" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="Registration" type="argos:RegistrationType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="Titles" type="argos:TitlesType" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
-        <xs:attribute name="ID" type="xs:integer" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="RegistrationType">
+        <xs:attribute name="id" type="xs:string" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
     </xs:complexType>
     <!-- =============================================================================== -->
     <!-- =================================  DEFS  ================================== -->
@@ -178,26 +162,6 @@
             <xs:element name="Kennels" type="argos:KennelsType" minOccurs="0" maxOccurs="1"/>
             <xs:element name="People" type="argos:PeopleType" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="RegistryType">
-        <xs:annotation>
-            <xs:documentation></xs:documentation>
-        </xs:annotation>
-        <xs:sequence>
-            <xs:element name="titles" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
-        </xs:sequence>
-        <xs:attribute name="id" type="xs:string" use="required"/>
-        <xs:attribute name="name" type="xs:string" use="required"/>
-    </xs:complexType>
-    <xs:complexType name="TitleType">
-        <xs:annotation>
-            <xs:documentation></xs:documentation>
-        </xs:annotation>
-        <xs:sequence>
-            <xs:element name="title" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
-        </xs:sequence>
-        <xs:attribute name="id" type="xs:string" use="required"/>
-        <xs:attribute name="name" type="xs:string" use="required"/>
     </xs:complexType>
     <xs:complexType name="PhenotypesType">
         <xs:sequence>
@@ -248,6 +212,7 @@
         <xs:annotation>
             <xs:documentation></xs:documentation>
         </xs:annotation>
+        <xs:attribute name="id" type="xs:integer" use="required"/>
         <xs:attribute name="name" type="xs:string" use="required"/>
     </xs:complexType>
     <xs:complexType name="AttributesType">
@@ -268,5 +233,43 @@
                         </xs:annotation>
             </xs:element>
         </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TitlesType">
+        <xs:sequence>
+            <xs:element name="Title" type="argos:TitleType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TitleType">
+        <xs:attribute name="id" type="xs:string" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="type" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Agility, Obedience, Rally, etc.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="ps" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Prefix or Suffix (P/S)</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="RolesType">
+        <xs:sequence>
+            <xs:element name="Role" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CertificationsType">
+        <xs:sequence>
+            <xs:element name="Certification" type="argos:CertificationType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CertificationType">
+        <xs:attribute name="id" type="xs:string" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="type" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Breeder, Judge, etc.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 </xs:schema>
