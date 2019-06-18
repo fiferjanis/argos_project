@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://quixoticshepherds.com/argos" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:argos="http://quixoticshepherds.com/argos" 
+    xmlns:xhtml="http://www.w3.org/1999/xhtml" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.1">
+    <xs:import namespace="http://www.w3.org/1999/xhtml" schemaLocation="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"/>
+    <xs:annotation>
+        <xs:documentation>The ARGOS Schema is maintained by Janis E. Kenderdine. For more information, including how to get involved in the project and how to submit change requests, please visit the ARGOS-K9 Project website at https://argos.quixoticshepherds.com.</xs:documentation>
+        <xs:appinfo>
+            <schema>Core Definition</schema>
+            <version>0.1</version>
+            <date>14 June 2019</date>
+            <terms_of_use>This program is free software: you can redistribute it and/or modify
+                it under the terms of the GNU General Public License as published by
+                the Free Software Foundation, either version 3 of the License, or
+                (at your option) any later version.
+            
+                This program is distributed in the hope that it will be useful,
+                but WITHOUT ANY WARRANTY; without even the implied warranty of
+                MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                GNU General Public License for more details.
+            
+                You should have received a copy of the GNU General Public License
+                along with this program.  If not, see https://www.gnu.org/licenses/.</terms_of_use>
+        </xs:appinfo>
+    </xs:annotation>
+    <!-- =============================================================================== -->
+    <!-- =================================  Database  ================================== -->
+    <!-- =============================================================================== -->
+    <xs:element name="ARGOS-K9_Database">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Dogs" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Dog" minOccurs="1" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="People" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Person" minOccurs="1" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Kennels" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Kennel" minOccurs="1" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Organizations" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Organization" minOccurs="1" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Registrations" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Registry" minOccurs="1" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="Name" type="xs:string" use="required"/>
+            <xs:attribute name="Version" type="xs:string" use="required"/>
+            <xs:attribute name="Date" type="xs:date" use="required"/>
+        </xs:complexType>
+        <xs:unique name="uniqueDogID">
+            <xs:selector xpath="./argos:Dogs/argos:Dog"/>
+            <xs:field xpath="@ID"/>
+        </xs:unique>
+        <xs:unique name="uniquePersonID">
+            <xs:selector xpath="./argos:People/argos:Person"/>
+            <xs:field xpath="@ID"/>
+        </xs:unique>
+        <xs:unique name="uniqueKennelID">
+            <xs:selector xpath="./argos:Kennels/argos:Kennel"/>
+            <xs:field xpath="@ID"/>
+        </xs:unique>
+        <xs:unique name="uniqueOrganizationID">
+            <xs:selector xpath="./argos:Organizations/argos:Organization"/>
+            <xs:field xpath="@ID"/>
+        </xs:unique>
+        <xs:unique name="uniqueRegistryID">
+            <xs:selector xpath="./argos:Registrations/argos:Registry"/>
+            <xs:field xpath="@ID"/>
+        </xs:unique>
+    </xs:element>
+
+    <!-- =============================================================================== -->
+    <!-- ====================================  DOG  ==================================== -->
+    <!-- =============================================================================== -->
+    <xs:complexType name="DogType">
+        <xs:annotation>
+            <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Identifiers">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Call_Name" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+                        <xs:element name="Registered_Name" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Attributes">
+
+            </xs:element>
+            <xs:element name="Behaviors"></xs:element>
+            <xs:element name="Relationships"></xs:element>
+        </xs:sequence>
+        <xs:attribute name="ID" type="xs:integer" use="required"/>
+        
+    </xs:complexType>
+    <!-- =============================================================================== -->
+    <!-- ==================================  PERSON  =================================== -->
+    <!-- =============================================================================== -->
+    <xs:complexType name="PersonType">
+        <xs:annotation>
+            <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="First_Name" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="Last_Name" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="ID" type="xs:integer" use="required"/>
+    </xs:complexType>
+</xs:schema>
