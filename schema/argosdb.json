@@ -1,0 +1,951 @@
+{
+  "xs:schema": {
+    "$": {
+      "targetNamespace": "http://quixoticshepherds.com/argos",
+      "xmlns:xs": "http://www.w3.org/2001/XMLSchema",
+      "xmlns:argos": "http://quixoticshepherds.com/argos",
+      "xmlns:xhtml": "http://www.w3.org/1999/xhtml",
+      "elementFormDefault": "qualified",
+      "attributeFormDefault": "unqualified",
+      "version": "0.1"
+    },
+    "xs:import": [
+      {
+        "$": {
+          "namespace": "http://www.w3.org/1999/xhtml",
+          "schemaLocation": "http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"
+        }
+      }
+    ],
+    "xs:annotation": [
+      {
+        "xs:documentation": [
+          "The ARGOS Schema is maintained by Janis E. Kenderdine. For more information, including how to get involved in the project and how to submit change requests, please visit the ARGOS-K9 Project website at https://argos.quixoticshepherds.com."
+        ],
+        "xs:appinfo": [
+          {
+            "schema": [
+              "Core Definition"
+            ],
+            "version": [
+              "0.1"
+            ],
+            "date": [
+              "14 June 2019"
+            ],
+            "terms_of_use": [
+              "This program is free software: you can redistribute it and/or modify\n                it under the terms of the GNU General Public License as published by\n                the Free Software Foundation, either version 3 of the License, or\n                (at your option) any later version.\n            \n                This program is distributed in the hope that it will be useful,\n                but WITHOUT ANY WARRANTY; without even the implied warranty of\n                MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n                GNU General Public License for more details.\n            \n                You should have received a copy of the GNU General Public License\n                along with this program.  If not, see https://www.gnu.org/licenses/."
+            ]
+          }
+        ]
+      }
+    ],
+    "xs:element": [
+      {
+        "$": {
+          "name": "ARGOS-K9_Database"
+        },
+        "xs:complexType": [
+          {
+            "xs:sequence": [
+              {
+                "xs:element": [
+                  {
+                    "$": {
+                      "name": "Dogs",
+                      "type": "argos:DogsType",
+                      "minOccurs": "0",
+                      "maxOccurs": "1"
+                    }
+                  },
+                  {
+                    "$": {
+                      "name": "Kennels",
+                      "type": "argos:KennelsType",
+                      "minOccurs": "0",
+                      "maxOccurs": "1"
+                    }
+                  },
+                  {
+                    "$": {
+                      "name": "People",
+                      "type": "argos:PeopleType",
+                      "minOccurs": "0",
+                      "maxOccurs": "1"
+                    }
+                  },
+                  {
+                    "$": {
+                      "name": "Organizations",
+                      "type": "argos:OrganizationsType",
+                      "minOccurs": "0",
+                      "maxOccurs": "1"
+                    }
+                  }
+                ]
+              }
+            ],
+            "xs:attribute": [
+              {
+                "$": {
+                  "name": "name",
+                  "type": "xs:string",
+                  "use": "required"
+                }
+              },
+              {
+                "$": {
+                  "name": "version",
+                  "type": "xs:string",
+                  "use": "required"
+                }
+              },
+              {
+                "$": {
+                  "name": "date",
+                  "type": "xs:date",
+                  "use": "required"
+                }
+              }
+            ]
+          }
+        ],
+        "xs:unique": [
+          {
+            "$": {
+              "name": "uniqueDogID"
+            },
+            "xs:selector": [
+              {
+                "$": {
+                  "xpath": "./argos:Dogs/argos:Dog"
+                }
+              }
+            ],
+            "xs:field": [
+              {
+                "$": {
+                  "xpath": "@id"
+                }
+              }
+            ]
+          },
+          {
+            "$": {
+              "name": "uniqueKennelID"
+            },
+            "xs:selector": [
+              {
+                "$": {
+                  "xpath": "./argos:Kennels/argos:Kennel"
+                }
+              }
+            ],
+            "xs:field": [
+              {
+                "$": {
+                  "xpath": "@id"
+                }
+              }
+            ]
+          },
+          {
+            "$": {
+              "name": "uniquePersonID"
+            },
+            "xs:selector": [
+              {
+                "$": {
+                  "xpath": "./argos:People/argos:Person"
+                }
+              }
+            ],
+            "xs:field": [
+              {
+                "$": {
+                  "xpath": "@id"
+                }
+              }
+            ]
+          },
+          {
+            "$": {
+              "name": "uniqueOrganizationID"
+            },
+            "xs:selector": [
+              {
+                "$": {
+                  "xpath": "./argos:Organizations/argos:Organization"
+                }
+              }
+            ],
+            "xs:field": [
+              {
+                "$": {
+                  "xpath": "@id"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "xs:complexType": [
+      {
+        "$": {
+          "name": "DogsType"
+        },
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "Dog",
+                  "type": "argos:DogType",
+                  "minOccurs": "1",
+                  "maxOccurs": "unbounded"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "DogType"
+        },
+        "xs:annotation": [
+          {
+            "xs:documentation": [
+              ""
+            ]
+          }
+        ],
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "Attributes",
+                  "type": "argos:AttributesType",
+                  "minOccurs": "0",
+                  "maxOccurs": "1"
+                },
+                "xs:annotation": [
+                  {
+                    "xs:documentation": [
+                      "Attributes that describe the dog"
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "name": "Events"
+                },
+                "xs:annotation": [
+                  {
+                    "xs:documentation": [
+                      ""
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "name": "Relationships"
+                }
+              }
+            ]
+          }
+        ],
+        "xs:attribute": [
+          {
+            "$": {
+              "name": "id",
+              "type": "xs:string",
+              "use": "required"
+            }
+          },
+          {
+            "$": {
+              "name": "name",
+              "type": "xs:string",
+              "use": "required"
+            }
+          },
+          {
+            "$": {
+              "name": "gender",
+              "type": "xs:string",
+              "use": "required"
+            }
+          },
+          {
+            "$": {
+              "name": "altered",
+              "type": "xs:string",
+              "use": "optional"
+            }
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "KennelsType"
+        },
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "Kennel",
+                  "type": "argos:KennelType",
+                  "minOccurs": "1",
+                  "maxOccurs": "unbounded"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "KennelType"
+        },
+        "xs:annotation": [
+          {
+            "xs:documentation": [
+              ""
+            ]
+          }
+        ],
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "Breeds",
+                  "minOccurs": "0",
+                  "maxOccurs": "1"
+                },
+                "xs:complexType": [
+                  {
+                    "xs:sequence": [
+                      {
+                        "xs:element": [
+                          {
+                            "$": {
+                              "name": "Breed",
+                              "type": "argos:BreedType",
+                              "minOccurs": "0",
+                              "maxOccurs": "unbounded"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "name": "Relationships"
+                },
+                "xs:complexType": [
+                  {
+                    "xs:sequence": [
+                      {
+                        "xs:element": [
+                          {
+                            "$": {
+                              "name": "People",
+                              "type": "argos:PeopleType",
+                              "minOccurs": "0",
+                              "maxOccurs": "1"
+                            }
+                          },
+                          {
+                            "$": {
+                              "name": "Organizations",
+                              "type": "argos:OrganizationsType",
+                              "minOccurs": "0",
+                              "maxOccurs": "1"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "xs:attribute": [
+          {
+            "$": {
+              "name": "id",
+              "type": "xs:integer",
+              "use": "required"
+            }
+          },
+          {
+            "$": {
+              "name": "short_name",
+              "type": "xs:string",
+              "use": "required"
+            }
+          },
+          {
+            "$": {
+              "name": "long_name",
+              "type": "xs:string",
+              "use": "required"
+            }
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "PeopleType"
+        },
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "Person",
+                  "type": "argos:PersonType",
+                  "minOccurs": "0",
+                  "maxOccurs": "unbounded"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "PersonType"
+        },
+        "xs:annotation": [
+          {
+            "xs:documentation": [
+              ""
+            ]
+          }
+        ],
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "Relationship",
+                  "minOccurs": "0",
+                  "maxOccurs": "2"
+                },
+                "xs:annotation": [
+                  {
+                    "xs:documentation": [
+                      "Relationship type (i.e. owner or breeder)"
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "name": "Registries",
+                  "minOccurs": "0",
+                  "maxOccurs": "1"
+                },
+                "xs:complexType": [
+                  {
+                    "xs:sequence": [
+                      {
+                        "xs:element": [
+                          {
+                            "$": {
+                              "name": "Registry",
+                              "type": "argos:RegistryType",
+                              "minOccurs": "0",
+                              "maxOccurs": "unbounded"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "xs:attribute": [
+          {
+            "$": {
+              "name": "id",
+              "type": "xs:integer",
+              "use": "required"
+            }
+          },
+          {
+            "$": {
+              "name": "first_name",
+              "type": "xs:string",
+              "use": "required"
+            }
+          },
+          {
+            "$": {
+              "name": "last_name",
+              "type": "xs:string",
+              "use": "required"
+            }
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "OrganizationsType"
+        },
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "Organization",
+                  "type": "argos:OrganizationType",
+                  "minOccurs": "1",
+                  "maxOccurs": "unbounded"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "OrganizationType"
+        },
+        "xs:annotation": [
+          {
+            "xs:documentation": [
+              ""
+            ]
+          }
+        ],
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "First_Name",
+                  "type": "xs:string",
+                  "minOccurs": "1",
+                  "maxOccurs": "unbounded"
+                }
+              },
+              {
+                "$": {
+                  "name": "Last_Name",
+                  "type": "xs:string",
+                  "minOccurs": "1",
+                  "maxOccurs": "unbounded"
+                }
+              }
+            ]
+          }
+        ],
+        "xs:attribute": [
+          {
+            "$": {
+              "name": "ID",
+              "type": "xs:integer",
+              "use": "required"
+            }
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "RelationshipsType"
+        },
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "Organizations",
+                  "type": "argos:OrganizationsType",
+                  "minOccurs": "0",
+                  "maxOccurs": "1"
+                }
+              },
+              {
+                "$": {
+                  "name": "Kennels",
+                  "type": "argos:KennelsType",
+                  "minOccurs": "0",
+                  "maxOccurs": "1"
+                }
+              },
+              {
+                "$": {
+                  "name": "People",
+                  "type": "argos:PeopleType",
+                  "minOccurs": "0",
+                  "maxOccurs": "1"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "RegistryType"
+        },
+        "xs:annotation": [
+          {
+            "xs:documentation": [
+              ""
+            ]
+          }
+        ],
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "titles",
+                  "type": "xs:string",
+                  "minOccurs": "1",
+                  "maxOccurs": "unbounded"
+                }
+              }
+            ]
+          }
+        ],
+        "xs:attribute": [
+          {
+            "$": {
+              "name": "id",
+              "type": "xs:string",
+              "use": "required"
+            }
+          },
+          {
+            "$": {
+              "name": "name",
+              "type": "xs:string",
+              "use": "required"
+            }
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "TitleType"
+        },
+        "xs:annotation": [
+          {
+            "xs:documentation": [
+              ""
+            ]
+          }
+        ],
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "title",
+                  "type": "xs:string",
+                  "minOccurs": "1",
+                  "maxOccurs": "unbounded"
+                }
+              }
+            ]
+          }
+        ],
+        "xs:attribute": [
+          {
+            "$": {
+              "name": "id",
+              "type": "xs:string",
+              "use": "required"
+            }
+          },
+          {
+            "$": {
+              "name": "name",
+              "type": "xs:string",
+              "use": "required"
+            }
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "PhenotypesType"
+        },
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "Phenotype",
+                  "type": "argos:PhenotypeType",
+                  "minOccurs": "0",
+                  "maxOccurs": "unbounded"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "PhenotypeType"
+        },
+        "xs:annotation": [
+          {
+            "xs:documentation": [
+              ""
+            ]
+          }
+        ],
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "title",
+                  "type": "xs:string",
+                  "minOccurs": "1",
+                  "maxOccurs": "unbounded"
+                }
+              }
+            ]
+          }
+        ],
+        "xs:attribute": [
+          {
+            "$": {
+              "name": "id",
+              "type": "xs:string",
+              "use": "required"
+            }
+          },
+          {
+            "$": {
+              "name": "name",
+              "type": "xs:string",
+              "use": "required"
+            }
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "GenotypesType"
+        },
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "Genotype",
+                  "type": "argos:GenotypeType",
+                  "minOccurs": "0",
+                  "maxOccurs": "unbounded"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "GenotypeType"
+        },
+        "xs:annotation": [
+          {
+            "xs:documentation": [
+              ""
+            ]
+          }
+        ],
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "title",
+                  "type": "xs:string",
+                  "minOccurs": "1",
+                  "maxOccurs": "unbounded"
+                }
+              }
+            ]
+          }
+        ],
+        "xs:attribute": [
+          {
+            "$": {
+              "name": "id",
+              "type": "xs:string",
+              "use": "required"
+            }
+          },
+          {
+            "$": {
+              "name": "name",
+              "type": "xs:string",
+              "use": "required"
+            }
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "CharacteristicsType"
+        },
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "Character",
+                  "type": "argos:CharacterType",
+                  "minOccurs": "0",
+                  "maxOccurs": "unbounded"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "CharacterType"
+        },
+        "xs:annotation": [
+          {
+            "xs:documentation": [
+              ""
+            ]
+          }
+        ],
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "title",
+                  "type": "xs:string",
+                  "minOccurs": "1",
+                  "maxOccurs": "unbounded"
+                }
+              }
+            ]
+          }
+        ],
+        "xs:attribute": [
+          {
+            "$": {
+              "name": "id",
+              "type": "xs:string",
+              "use": "required"
+            }
+          },
+          {
+            "$": {
+              "name": "name",
+              "type": "xs:string",
+              "use": "required"
+            }
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "BreedType"
+        },
+        "xs:annotation": [
+          {
+            "xs:documentation": [
+              ""
+            ]
+          }
+        ],
+        "xs:attribute": [
+          {
+            "$": {
+              "name": "name",
+              "type": "xs:string",
+              "use": "required"
+            }
+          }
+        ]
+      },
+      {
+        "$": {
+          "name": "AttributesType"
+        },
+        "xs:sequence": [
+          {
+            "xs:element": [
+              {
+                "$": {
+                  "name": "Phenotypes",
+                  "type": "argos:PhenotypesType",
+                  "minOccurs": "0",
+                  "maxOccurs": "1"
+                },
+                "xs:annotation": [
+                  {
+                    "xs:documentation": [
+                      "Physical characteristics"
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "name": "Genotypes",
+                  "type": "argos:GenotypesType",
+                  "minOccurs": "0",
+                  "maxOccurs": "1"
+                },
+                "xs:annotation": [
+                  {
+                    "xs:documentation": [
+                      "Genetic characteristics"
+                    ]
+                  }
+                ]
+              },
+              {
+                "$": {
+                  "name": "Characteristics",
+                  "type": "argos:CharacteristicsType",
+                  "minOccurs": "0",
+                  "maxOccurs": "1"
+                },
+                "xs:annotation": [
+                  {
+                    "xs:documentation": [
+                      "Temperament characteristics"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
