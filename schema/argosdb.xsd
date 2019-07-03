@@ -95,7 +95,6 @@
         <xs:attribute name="name" type="xs:string" use="required"/>
         <xs:attribute name="gender" type="xs:string" use="required"/>
         <xs:attribute name="altered" type="xs:string" use="optional"/>
-        <xs:attribute name="role" type="argos:RoleEnumeration" use="optional"/>
     </xs:complexType>
     <!-- =============================================================================== -->
     <!-- ==================================  KENNEL  =================================== -->
@@ -112,7 +111,6 @@
         <xs:sequence>
             <xs:element name="Breeds" type="argos:BreedsType" minOccurs="1" maxOccurs="1"/>
             <xs:element name="Relationships" type="argos:RelationshipsType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="Roles" type="argos:RolesType" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:integer" use="required"/>
         <xs:attribute name="short" type="xs:string" use="required"/>
@@ -133,7 +131,6 @@
         </xs:annotation>
         <xs:sequence>
             <xs:element name="Relationships" type="argos:RelationshipsType" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="Roles" type="argos:RolesType" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:integer" use="required"/>
         <xs:attribute name="first_name" type="xs:string" use="required"/>
